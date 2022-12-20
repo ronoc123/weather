@@ -1,10 +1,17 @@
-import React from "react";
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import SimpleBottomNavigation from "./Components/Navbar";
+import SearchAppBar from "./Components/SearchBar";
 function App() {
   return (
-    <div className="bg-green-500">
-      hello
-      <div className="">big pawg</div>
+    <div>
+      <BrowserRouter>
+        <SearchAppBar />
+        <Routes>
+          <Route index path="/" element={<Home />} />
+        </Routes>
+        <SimpleBottomNavigation />
+      </BrowserRouter>
     </div>
   );
 }
