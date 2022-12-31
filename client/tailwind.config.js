@@ -14,6 +14,9 @@ module.exports = {
         lg: "976px",
         xl: "1440px",
       },
+      gridTemplateColumns: {
+        main: "2fr 1fr",
+      },
     },
   },
   plugins: [],

@@ -10,6 +10,9 @@ import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useAppContext } from "../context/AppContext";
+import { useState } from "react";
+import SearchBar from "@mui/material";
 
 const theme = createTheme({
   palette: {
@@ -63,6 +66,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const ctx = useAppContext();
+  const [value, setValue] = useState<string>("");
+
+  if (ctx === null) return <div>...Loading</div>;
+
+  const { updateUserLocation } = ctx;
+
+  const handleSubmit = () => {
+    console.log(typeof value);
+    updateUserLocation(value);
+    setValue("");
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flexGrow: 1 }}>
@@ -90,10 +106,18 @@ export default function SearchAppBar() {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Search City or Zip Code..."
+                placeholder="Search Zip Code or city..."
                 inputProps={{ "aria-label": "search" }}
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
               />
             </Search>
+            <button
+              className="p-2 bg-white text-dark-purple rounded-sm"
+              onClick={handleSubmit}
+            >
+              Search
+            </button>
           </Toolbar>
         </AppBar>
       </Box>

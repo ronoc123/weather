@@ -6,9 +6,11 @@ import RestoreIcon from "@mui/icons-material/Restore";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 
 export default function SimpleBottomNavigation() {
   const [value, setValue] = React.useState(0);
+  const navigate = useNavigate();
 
   const theme = createTheme({
     components: {
@@ -48,9 +50,27 @@ export default function SimpleBottomNavigation() {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="Current" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="Weekly" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="Locations" icon={<LocationOnIcon />} />
+          <BottomNavigationAction
+            label="Current"
+            icon={<RestoreIcon />}
+            onClick={() => {
+              navigate("/");
+            }}
+          />
+          <BottomNavigationAction
+            label="Weekly"
+            icon={<FavoriteIcon />}
+            onClick={() => {
+              navigate("/weekly");
+            }}
+          />
+          <BottomNavigationAction
+            label="Locations"
+            icon={<LocationOnIcon />}
+            onClick={() => {
+              navigate("/locations");
+            }}
+          />
         </BottomNavigation>
       </Box>
     </ThemeProvider>
